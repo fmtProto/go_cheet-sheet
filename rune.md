@@ -1,43 +1,68 @@
 ## Определение
 
 **`rune`** - это тип данных, псевдоним для `int32`, представляет кодовую точку `Unicode`.
+
 - имеет ограничение от -2_147_483_648 до 2_147_483_647 в числовом диапазоне, так же как и `int32`
-- тип данных `rune` используется для семантического различия между `int32` и `rune`
-- `rune` создан представлять символы `Unicode(UTF-8)`, то есть до 4 байт(точка `Unicode` может иметь максимальную длину 4 байта )
+- тип данных `rune` используется для различия между `int32` и `rune`
+- `rune` создан представлять символы `Unicode`, то есть до 4 байт(точка `Unicode` может иметь максимальную длину 4 байта )
 
 ## Объявление
 
-При объявление `rune` используются прямые кавычки `''` и указывается тип `rune`(необязательно, присваивается по умолчанию). 
-Нулевым значением для rune является `0` (int32):
-
+Переменную типа `rune` часто инициализируют:
+- **путем назначения `Unicode` символа, указывая его в одинарных кавычках `''`**
 ```go
-var i = 's'
-var j rune
+var a rune = 'л'
+fmt.Println(a)                            // 1083
+fmt.Printf("Size: %d", unsafe.Sizeof(a))  // Size: 4
+fmt.Printf("Type: %s", reflect.TypeOf(a)) // Type: int32
+fmt.Printf("Character: %c", a)            // Character: л
+fmt.Printf("Unicode CodePoint: %U", a)    // Unicode CodePoint: U+043B
+```
+
+- **путем назначения десятичного целого числа в диапазоне `int32`**
+```go
+var a rune = 1083
+fmt.Println(a)                            // 1083
+fmt.Printf("Size: %d", unsafe.Sizeof(a))  // Size: 4
+fmt.Printf("Type: %s", reflect.TypeOf(a)) // Type: int32
+fmt.Printf("Character: %c", a)            // Character: л
+fmt.Printf("Unicode CodePoint: %U", a)    // Unicode CodePoint: U+043B
+```
+
+При объявление перменной типа `rune` указание типа является необязательным(в отличие от типа `byte`). 
+```go
+var a = 'л' // тип rune
+b := 'и'    // тип rune
+```
+
+Нулевым значением для rune является `0` (int32):
+```go
+var a rune
+fmt.Println(a)                            // 0
+fmt.Printf("Size: %d", unsafe.Sizeof(a))  // Size: 4
+fmt.Printf("Type: %s", reflect.TypeOf(a)) // Type: int32
+fmt.Printf("Character: %c", a)            // Character:
+fmt.Printf("Unicode CodePoint: %U", a)    // Unicode CodePoint: U+0000
+```
+
+Как было сказанно выше, `rune` создана для работы с символами `Unicode`. Поэтому задать многобайтовый символ типу данных `rune` очень просто(в отличие от `byte` которому это сделать невозможно):
+```go
 k := '\U0001F3A8'
 l := '£'
 
-fmt.Println(i) // 115 значение кодовой точки в десятичном формате
-fmt.Println(j) // 0
 fmt.Println(k) // 127912 значение кодовой точки в десятичном формате
 fmt.Println(l) // 163 значение кодовой точки в десятичном формате
 
-fmt.Printf("Size: %d\n", unsafe.Sizeof(i)) // Size: 4
-fmt.Printf("Size: %d\n", unsafe.Sizeof(j)) // Size: 4
 fmt.Printf("Size: %d\n", unsafe.Sizeof(k)) // Size: 4
 fmt.Printf("Size: %d\n", unsafe.Sizeof(l)) // Size: 4
 
-fmt.Printf("Type: %s\n", reflect.TypeOf(i)) // Type: int32
-fmt.Printf("Type: %s\n", reflect.TypeOf(j)) // Type: int32
 fmt.Printf("Type: %s\n", reflect.TypeOf(k)) // Type: int32
 fmt.Printf("Type: %s\n", reflect.TypeOf(l)) // Type: int32
 
-fmt.Printf("Character: %c\n", i) //  Character: s
-fmt.Printf("Character: %c\n", j) //  Character:
+
 fmt.Printf("Character: %c\n", k) //  Character: 🎨
 fmt.Printf("Character: %c\n", l) //  Character: £
 
-fmt.Printf("Unicode CodePoint: %U\n", i) // Unicode CodePoint: U+0073
-fmt.Printf("Unicode CodePoint: %U\n", j) // Unicode CodePoint: U+0000
 fmt.Printf("Unicode CodePoint: %U\n", k) // Unicode CodePoint: U+1F3A8
 fmt.Printf("Unicode CodePoint: %U\n", l) // Unicode CodePoint: U+00A3
 ```
@@ -62,6 +87,7 @@ for _, v := range k {
 ```
 
 ## Конвертация
+
 ### string -> []rune
 ```go
 i := "hello"
