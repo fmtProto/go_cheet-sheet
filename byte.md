@@ -1,7 +1,6 @@
 ## Определение
 
 **`byte`** - это тип данных, псевдоним `uint8`, используются для того, чтобы отличить `byte` от реальных 8-битных целых чисел без знака`(uint8)`.  
-В Go используется `byte` или `rune` для представления значений символов, потому что нет типа данных `char`. 
 
 - `byte` имеет ограничение от 0 до 255 в числовом диапазоне, так же как и `uint8`
 - тип данных `byte` используется для различия между `uint8` и `byte`
@@ -10,14 +9,6 @@
 ## Объявление
 
 Байтовую переменную часто инициализируют:
-- **путем назначения десятичного целого числа от 0 до 255**
-```go
-var a byte = 90
-fmt.Println(a)                            // 90
-fmt.Printf("Size: %d", unsafe.Sizeof(a))  // Size: 1
-fmt.Printf("Type: %s", reflect.TypeOf(a)) // Type: uint8
-fmt.Printf("Character: %c", a)            // Character: Z
-```
 - **путем назначения `ASCII` символа, указывая его в одинарных кавычках `''` и явно указывая тип `byte`**
 ```go
 var a byte = 'Z'
@@ -26,6 +17,16 @@ fmt.Printf("Size: %d", unsafe.Sizeof(a))  // Size: 1
 fmt.Printf("Type: %s", reflect.TypeOf(a)) // Type: uint8
 fmt.Printf("Character: %c", a)            // Character: Z
 ```
+
+- **путем назначения десятичного целого числа от 0 до 255**
+```go
+var a byte = 90
+fmt.Println(a)                            // 90
+fmt.Printf("Size: %d", unsafe.Sizeof(a))  // Size: 1
+fmt.Printf("Type: %s", reflect.TypeOf(a)) // Type: uint8
+fmt.Printf("Character: %c", a)            // Character: Z
+```
+
 - **путем назначения целых чисел в отличной от 10-ой системах счисления(2-ая, 8-ая, 16-ая)**
 ```go
 var a byte = 0b01011010 // Binary
