@@ -8,7 +8,8 @@
 - `byte` создан для представления символов `ASCII`(символ `ASCII` как раз занимает в памяти 1 байт)
 
 ## Объявление
-Инициализировать байтовую переменную можно:
+
+Байтовую переменную часто инициализируют:
 - **путем назначения десятичного целого числа от 0 до 255**
 ```go
 var a byte = 90
@@ -17,7 +18,7 @@ fmt.Printf("Size: %d", unsafe.Sizeof(a))  // Size: 1
 fmt.Printf("Type: %s", reflect.TypeOf(a)) // Type: uint8
 fmt.Printf("Character: %c", a)            // Character: Z
 ```
-- **путем назначения `ASCII` символа, указывая его в одинарных кавычках `''`**
+- **путем назначения `ASCII` символа, указывая его в одинарных кавычках `''` и явно указывая тип `byte`**
 ```go
 var a byte = 'Z'
 fmt.Println(a)                            // 90
@@ -42,19 +43,6 @@ fmt.Println(i)                               // 115
 fmt.Printf("Size: %d\n", unsafe.Sizeof(i))   // Size: 4
 fmt.Printf("Type: %s\n", reflect.TypeOf(i))  // Type: int32
 fmt.Printf("Character: %c\n", i)             // Character: s
-
-var j = 'л' // тип данных `rune`
-fmt.Println(j)                               // 1083
-fmt.Printf("Size: %d\n", unsafe.Sizeof(j))   // Size: 4
-fmt.Printf("Type: %s\n", reflect.TypeOf(j))  // Type: int32
-fmt.Printf("Character: %c\n", j)             // Character: л
-
-var l = 120 // явно не указан тип byte, поэтому по умолчанию это int
-fmt.Println(l) // 120
-fmt.Printf("Size: %d\n", unsafe.Sizeof(l))  // Size: 8 (int зависит от процессора, в моем случае int64, поэтому 8)
-fmt.Printf("Type: %s\n", reflect.TypeOf(l)) // Type: int
-fmt.Printf("Character: %c\n", l)            // Character: x
-// %c представляет кодовую точку Unicode, соответствующую значению 120 типа int
 ```
 
 Нулевым значением для `byte` является `0`(uint8)
@@ -70,12 +58,15 @@ fmt.Printf("Character: %c\n", j)            // Character:
 ```go
 var i byte = 'л' // вызовет ошибку, 'л' - не входит в ASCII(0-255), надо использовать тип `rune`
 ```
+
 ## Конвертация
+
 ### string -> []byte
 ```go
 fmt.Println([]byte("hello"))   // [104 101 108 108 111] по 1 байту на символ
 fmt.Println([]byte("привет")) //  [208 191 209 128 208 184 208 178 208 181 209 130]  по 2 байта на символ
 ```
+
 ### []byte -> string
 ```go
 i := []byte{104, 101, 108, 108, 111}
