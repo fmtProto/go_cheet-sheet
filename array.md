@@ -82,7 +82,7 @@ fmt.Println(arr[-1]) // invalid argument: index -1 (constant of type int) must n
 ```go
 arr := [3]int{1, 2, 3}
 arr[1] = 45
-fmt.Println(arr[1]) // 45
+fmt.Println(arr) // [1 45 3]
 ```
 
 При попытке получить доступ к элементу за пределами диапазона массива, компилятор сообщит об ошибке.
