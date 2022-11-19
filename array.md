@@ -70,6 +70,11 @@ fmt.Println(arr[1]) // 2
 arr := [3]int{1, 2, 3}
 fmt.Println(arr[5]) // invalid argument: index 5 out of bounds [0:3]
 ```
+Go не поддерживает обратную индексацию с использованием отрицательных чисел, будет выведена ошибка.
+```go
+arr := [2]string{"one", "two"}
+fmt.Println(arr[-1]) // invalid argument: index -1 (constant of type int) must not be negative
+```
 
 ### Изменение элементов <a name="edit"></a>
 Изменить значение определенного элемента массива, можно обратившись к нему по номеру индекса.
