@@ -140,7 +140,7 @@ arr[0] = "one" // cannot use "one" (untyped string constant) as int value in ass
 ```go
 arr1 := [3]int{1, 2, 3}
 arr2 := [2]int{1, 2}
-arr1 = arr2 // cannot use arr2 (variable of type [2]int) as type [3]int in assignment
+arr1 = arr2 // cannot use arr2 (variable of type [2]int) as type [3]int in assignment)
 ```
 
 Для получения количества элементов массива(длины массива), можно использовать функцию `len()`, она вернет количество элементов в указанном массиве.
@@ -153,6 +153,7 @@ fmt.Println(len(arr)) // 3
 ```go
 arr := [3]int{1, 2, 3}
 fmt.Println(cap(arr)) // 3
+fmt.Println(len(arr)) // 3
 ```
 
 ## Копирование массива <a name="copy"></a>
