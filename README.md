@@ -1,4 +1,1 @@
-- [Byte](byte.md)
-- [Rune](rune.md)
-- [String](string.md)
-- [Array](array.md)
+
